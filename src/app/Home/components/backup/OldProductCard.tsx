@@ -1,6 +1,7 @@
 import { Heart } from "lucide-react";
 
-const ProductCard = ({ product }) => (
+
+const OldProductCard = ({ product  }: { product: any }) => (
     <div className="group relative bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col">
       <div className="relative w-full aspect-[3/4] overflow-hidden">
         <img
@@ -31,4 +32,4 @@ const ProductCard = ({ product }) => (
     </div>
   );
 
-export default ProductCard;
+export default OldProductCard;

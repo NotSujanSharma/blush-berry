@@ -1,3 +1,4 @@
+import HomePage from "@/app/Home/page";
 import { ProductListByCollectionDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/lib/graphql";
 import { ProductList } from "@/ui/components/ProductList";
@@ -23,11 +24,15 @@ export default async function Page(props: { params: Promise<{ channel: string }>
 	}
 
 	const products = data.collection?.products.edges.map(({ node: product }) => product);
+	//four products
+	const top4Products = products.slice(0, 4); 
 
 	return (
-		<section className="mx-auto max-w-7xl p-8 pb-16">
+		// <section className="mx-auto max-w-7xl p-8 pb-16">
+		<section>
 			<h2 className="sr-only">Product list</h2>
-			<ProductList products={products} />
+			{/* <ProductList products={products} /> */}
+			<HomePage products={top4Products} />
 		</section>
 	);
 }

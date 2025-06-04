@@ -38,6 +38,7 @@ export const Checkout = () => {
 					</div>
 				)}
 			</div>
-		</ErrorBoundary>
+			</ErrorBoundary>
+				
 	);
 };

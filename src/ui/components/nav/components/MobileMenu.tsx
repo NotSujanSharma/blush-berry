@@ -29,7 +29,11 @@ export const MobileMenu = ({ children }: Props) => {
 							leaveFrom="bg-neutral-100"
 							leaveTo="bg-transparent"
 						>
+							<div className="flex-shrink-0">
+						  <span className="text-4xl mt-2 font-serif font-bold bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 bg-clip-text text-transparent tracking-tight group-hover:scale-105 transition-transform duration-300 inline-block">
 							<Logo />
+						  </span>
+					  </div>
 							<CloseButton onClick={closeMenu} aria-controls="mobile-menu" />
 						</Transition.Child>
 						<Transition.Child
@@ -42,7 +46,7 @@ export const MobileMenu = ({ children }: Props) => {
 							leaveTo="opacity-0 -translate-y-3 bg-transparent"
 						>
 							<ul
-								className="flex h-full flex-col divide-y divide-neutral-200 whitespace-nowrap p-3 pt-0 sm:p-8 sm:pt-0 [&>li]:py-3"
+								className="flex h-full flex-col divide-y divide-neutral-200 whitespace-nowrap p-3 pt-0 sm:p-8 sm:pt-0 [&>li]:py-3 bg-pink-200"
 								id="mobile-menu"
 							>
 								{children}
