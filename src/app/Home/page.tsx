@@ -16,7 +16,6 @@ import {PromoSection} from "./components/PromoSection";
 import {PromiseSection} from "./components/PromiseSection";
 import { NewsletterSection } from "./components/NewsletterSection";
 import { HeroSection } from "./components/HeroSection";
-import { type ProductListItemFragment } from "@/gql/graphql";
 
 // import { Header } from "@/ui/components/Header";
 // import { Footer } from "@/ui/components/Footer";

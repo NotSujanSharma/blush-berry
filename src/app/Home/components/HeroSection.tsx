@@ -1,5 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import { FloatingParticles } from "./FloatingParticles";
+import { LinkWithChannel } from "@/ui/atoms/LinkWithChannel";
 
 export const HeroSection = () => (
     <section className="relative min-h-[80vh] md:min-h-[calc(100vh-80px)] flex items-center bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 overflow-hidden">
@@ -41,13 +42,14 @@ export const HeroSection = () => (
               >
                 Explore Collection
                 <ChevronRight className="ml-2 -mr-1 h-5 w-5" />
-              </a>
-              <a
-                href="#"
+            </a>
+            <LinkWithChannel
+              
+                href="/pages/our-philosophy"
                 className="inline-flex items-center justify-center px-8 py-3 border-2 border-pink-200 text-base font-medium rounded-full text-pink-600 bg-transparent hover:bg-pink-50 hover:border-pink-300 transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
               >
                 Our Philosophy
-              </a>
+              </LinkWithChannel>
             </div>
           </div>
           <div className="relative h-80 md:h-[500px] lg:h-[600px]">

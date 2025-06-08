@@ -134,12 +134,13 @@ export async function Footer({ channel }: { channel: string }) {
 						&copy; {currentYear} Blushberry Co. All rights reserved.
 					</p>
 					<div className="flex justify-center space-x-4 mt-4 md:mt-0 text-xs">
-						<a href="#" className="hover:underline">
+						<LinkWithChannel href="/pages/privacy-policy" className="hover:underline">
 							Privacy Policy
-						</a>
-						<a href="#" className="hover:underline">
+						</LinkWithChannel>
+						<LinkWithChannel href="/pages/terms-of-service" className="hover:underline">
 							Terms of Service
-						</a>
+						</LinkWithChannel>
+						
 					</div>
 				</div>
 			</div>

@@ -8,21 +8,21 @@ import { ProductListByCollectionDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/lib/graphql";
 
 export async function FeaturedProductsSection({ channel }: { channel: string }) {
-        const data = await executeGraphQL(ProductListByCollectionDocument, {
-            variables: {
-                slug: "featured-products",
-                channel: channel,
-            },
-            revalidate: 60,
-        });
-    
-        if (!data.collection?.products) {
-            return null;
-        }
-    
-        var products = data.collection?.products.edges.map(({ node: product }) => product);
-        //four products
-        products = products.slice(0, 4); 
+    const data = await executeGraphQL(ProductListByCollectionDocument, {
+        variables: {
+            slug: "featured-products",
+            channel: channel,
+        },
+        revalidate: 60,
+    });
+
+    if (!data.collection?.products) {
+        return null;
+    }
+
+    var products = data.collection?.products.edges.map(({ node: product }) => product);
+    //four products
+    products = products.slice(0, 4);
     return (
         <section className="py-20 bg-pink-50/30">
             {" "}
@@ -37,26 +37,26 @@ export async function FeaturedProductsSection({ channel }: { channel: string }) 
                     </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-                   
-            
-                {products.map((product, index) => (
-                //     <ProductCard
-                //       key={product.id}
-                //       product={product}
-                //   />
-                  <ProductElement
-                      key={product.id}
-                    product={product}
-                    priority={index < 2}
-					loading={index < 3 ? "eager" : "lazy"}
-                    />
-                  ))}
+
+
+                    {products.map((product, index) => (
+                        //     <ProductCard
+                        //       key={product.id}
+                        //       product={product}
+                        //   />
+                        <ProductElement
+                            key={product.id}
+                            product={product}
+                            priority={index < 2}
+                            loading={index < 3 ? "eager" : "lazy"}
+                        />
+                    ))}
                 </div>
                 <div className="mt-16 text-center">
                     <LinkWithChannel
                         href="/products"
                         className="inline-flex items-center px-8 py-3 border-2 border-pink-500 text-base font-medium rounded-full text-pink-600 bg-transparent hover:bg-pink-500 hover:text-white transition-all duration-300 group"
-                    >      
+                    >
                         View All Products{" "}
                         <ChevronRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
                     </LinkWithChannel>
@@ -65,4 +65,3 @@ export async function FeaturedProductsSection({ channel }: { channel: string }) 
         </section>
     );
 }
-  

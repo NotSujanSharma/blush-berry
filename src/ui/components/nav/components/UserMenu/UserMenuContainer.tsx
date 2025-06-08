@@ -15,7 +15,7 @@ export async function UserMenuContainer() {
 		return (
 			<LinkWithChannel href="/login" className="p-2 text-gray-500 hover:text-pink-600 hover:bg-pink-50 rounded-full transition-all duration-300 group">
 				<UserIcon size={20}
-                className="group-hover:scale-110 transition-transform" aria-hidden="true" />
+					className="group-hover:scale-110 transition-transform" aria-hidden="true" />
 				<span className="sr-only">Log in</span>
 			</LinkWithChannel>
 		);

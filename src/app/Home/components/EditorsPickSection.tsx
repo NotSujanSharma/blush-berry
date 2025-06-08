@@ -1,116 +1,69 @@
 "use client";
 import { Wand2 } from "lucide-react";
 import { useState } from "react";
+import { Sparkles } from "lucide-react";
 
 export const EditorsPickSection = () => {
-    const mockProducts = [
-        {
-          id: 1,
-          name: "Aurora Veil Lipstick",
-          price: "$32.00",
-          image:
-            "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&h=750&fit=crop&crop=center",
-          category: "Makeup",
-          description:
-            "A weightless, hydrating matte lipstick with a velvety finish.",
-          badge: "Bestseller",
-        },
-        {
-          id: 2,
-          name: "Moonlit Dew Serum",
-          price: "$58.00",
-          image:
-            "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=750&fit=crop&crop=center",
-          category: "Skincare",
-          description:
-            "Revitalize your skin overnight with this potent, illuminating serum.",
-          badge: "New",
-        },
-        {
-          id: 3,
-          name: "Mystic Bloom Parfum",
-          price: "$95.00",
-          image:
-            "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&h=750&fit=crop&crop=center",
-          category: "Fragrance",
-          description: "An enchanting blend of rare florals and warm amber notes.",
-          badge: "Limited",
-        },
-        {
-          id: 4,
-          name: "Ethereal Skin Tint",
-          price: "$42.00",
-          image:
-            "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=750&fit=crop&crop=center",
-          category: "Makeup",
-          description:
-            "A breathable, light-coverage tint for a naturally flawless look.",
-          badge: "Trending",
-        },
-      ];
-    const featuredProduct = mockProducts[1];
-    const [userConcern, setUserConcern] = useState("");
-    const [generatedAdvice, setGeneratedAdvice] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
-    const [showAdviceForm, setShowAdviceForm] = useState(false);
+  const mockProducts = [
+    {
+      id: 1,
+      name: "Aurora Veil Lipstick",
+      price: "$32.00",
+      image:
+        "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&h=750&fit=crop&crop=center",
+      category: "Makeup",
+      description:
+        "A weightless, hydrating matte lipstick with a velvety finish.",
+      badge: "Bestseller",
+    },
+    {
+      id: 2,
+      name: "Moonlit Dew Serum",
+      price: "$58.00",
+      image:
+        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=750&fit=crop&crop=center",
+      category: "Skincare",
+      description:
+        "Revitalize your skin overnight with this potent, illuminating serum.",
+      badge: "New",
+    },
+    {
+      id: 3,
+      name: "Mystic Bloom Parfum",
+      price: "$95.00",
+      image:
+        "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&h=750&fit=crop&crop=center",
+      category: "Fragrance",
+      description: "An enchanting blend of rare florals and warm amber notes.",
+      badge: "Limited",
+    },
+    {
+      id: 4,
+      name: "Ethereal Skin Tint",
+      price: "$42.00",
+      image:
+        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=750&fit=crop&crop=center",
+      category: "Makeup",
+      description:
+        "A breathable, light-coverage tint for a naturally flawless look.",
+      badge: "Trending",
+    },
+  ];
+  const featuredProduct = mockProducts[1];
+  const [userConcern, setUserConcern] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [showAdviceForm, setShowAdviceForm] = useState(false);
   
-    const handleGetBeautyAdvice = async () => {
-      if (!userConcern.trim()) {
-        setError("Please tell us your beauty concern or question.");
-        return;
-      }
-      setIsLoading(true);
-      setError("");
-      setGeneratedAdvice("");
+  const handleGetBeautyAdvice = async () => {
+    if (!userConcern.trim()) {
+      setError("Please tell us your beauty concern or question.");
+      return;
+    }
+    setIsLoading(true);
+    setError("");
   
-      const prompt = `You are a friendly and knowledgeable beauty advisor for Blushberry.
-  A customer is interested in our featured product: "${featuredProduct.name}" which is a ${featuredProduct.category} described as: "${featuredProduct.description}".
-  Their beauty concern/question is: "${userConcern}".
-  Please provide a concise, helpful, and encouraging beauty tip (2-3 sentences) that addresses their concern. If relevant, mention how the "${featuredProduct.name}" could help or be incorporated. If it's not directly relevant, provide general advice for their concern. Sign off with a positive note from Blushberry.`;
-  
-      try {
-        let chatHistory = [];
-        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-        const payload = { contents: chatHistory };
-        const apiKey = "";
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-  
-        const response = await fetch(apiUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-  
-        if (!response.ok) {
-          throw new Error(`API request failed with status ${response.status}`);
-        }
-        const result = await response.json();
-        if (
-          result.candidates &&
-          result.candidates.length > 0 &&
-          result.candidates[0].content &&
-          result.candidates[0].content.parts &&
-          result.candidates[0].content.parts.length > 0
-        ) {
-          const text = result.candidates[0].content.parts[0].text;
-          setGeneratedAdvice(text);
-        } else {
-          console.error("Unexpected API response structure:", result);
-          throw new Error(
-            "Failed to get advice. The response from the AI was not as expected.",
-          );
-        }
-      } catch (e) {
-        console.error("Error fetching beauty advice:", e);
-        setError(
-          e.message ||
-            "Sorry, we couldn't fetch your personalized advice right now. Please try again later.",
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      
   
     return (
       <section className="py-20 bg-pink-50/50">
@@ -121,10 +74,7 @@ export const EditorsPickSection = () => {
                 src={featuredProduct.image}
                 alt={featuredProduct.name}
                 className="w-full max-w-md mx-auto md:max-w-none h-auto object-contain rounded-lg shadow-2xl transform transition-all duration-500 hover:scale-105"
-                onError={(e) =>
-                  (e.target.src =
-                    "https://placehold.co/600x750/cccccc/FFFFFF?text=Featured+Product+Error")
-                }
+                
               />
               <div className="absolute -top-8 -left-8 w-32 h-32 bg-gradient-to-br from-pink-400 to-rose-300 rounded-full opacity-30 animate-blob filter blur-xl"></div>
               <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-gradient-to-tl from-purple-400 to-pink-300 rounded-full opacity-30 animate-blob animation-delay-2000 filter blur-xl"></div>
@@ -167,7 +117,7 @@ export const EditorsPickSection = () => {
                     onChange={(e) => setUserConcern(e.target.value)}
                     placeholder="e.g., How can I achieve a dewy glow? or I have dry skin patches."
                     className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors text-sm"
-                    rows="3"
+                   
                   />
                   <button
                     onClick={handleGetBeautyAdvice}
@@ -208,16 +158,7 @@ export const EditorsPickSection = () => {
                   {error}
                 </p>
               )}
-              {generatedAdvice && (
-                <div className="mt-6 p-4 bg-pink-50 border border-pink-200 rounded-lg shadow-sm">
-                  <h4 className="text-md font-semibold text-pink-700 mb-2">
-                    ✨ Your Personalized Tip:
-                  </h4>
-                  <p className="text-sm text-gray-700 whitespace-pre-line">
-                    {generatedAdvice}
-                  </p>
-                </div>
-              )}
+              
             </div>
           </div>
         </div>
@@ -225,4 +166,4 @@ export const EditorsPickSection = () => {
     );
   };
   
-  
+}
