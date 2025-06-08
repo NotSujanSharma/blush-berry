@@ -22,7 +22,7 @@ import { type ProductListItemFragment } from "@/gql/graphql";
 // import { Footer } from "@/ui/components/Footer";
 
 
-export default function HomePage({ products }: { products: ProductListItemFragment[] }) {
+export default function HomePage({ channel }: { channel: string }) {
   return (
     <div>
       {/* <Header channel="default-channel"/> */}
@@ -30,7 +30,7 @@ export default function HomePage({ products }: { products: ProductListItemFragme
       <Category />
       <EditorsPickSection />
       <RitualSection />
-      <FeaturedProductsSection products={products} />
+      <FeaturedProductsSection channel={channel} />
       <ReviewsSection />
       <PromoSection />
       <PromiseSection />

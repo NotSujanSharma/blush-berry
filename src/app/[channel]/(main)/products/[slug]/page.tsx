@@ -13,6 +13,34 @@ import { formatMoney, formatMoneyRange } from "@/lib/utils";
 import { CheckoutAddLineDocument, ProductDetailsDocument, ProductListDocument } from "@/gql/graphql";
 import * as Checkout from "@/lib/checkout";
 import { AvailabilityMessage } from "@/ui/components/AvailabilityMessage";
+// import { Category } from "@/app/Home/components/Category";
+import {
+	Truck,
+	Shield,
+	RotateCcw,
+	Gift,
+	
+} from "lucide-react";
+
+const ProductBenefits = () => {
+	const benefits = [
+		{ icon: Truck, text: "Free shipping on orders over $50", color: "text-emerald-600" },
+		{ icon: RotateCcw, text: "30-day easy returns", color: "text-blue-600" },
+		{ icon: Shield, text: "2-year warranty included", color: "text-purple-600" },
+		{ icon: Gift, text: "Complimentary gift wrapping", color: "text-pink-600" },
+	];
+
+	return (
+		<div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-gradient-to-r from-pink-50 to-rose-50 rounded-xl">
+			{benefits.map((benefit, index) => (
+				<div key={index} className="flex items-center space-x-3">
+					<benefit.icon size={20} className={benefit.color} />
+					<span className="text-sm text-gray-700">{benefit.text}</span>
+				</div>
+			))}
+		</div>
+	);
+  };
 
 export async function generateMetadata(
 	props: {
@@ -49,13 +77,13 @@ export async function generateMetadata(
 		},
 		openGraph: product.thumbnail
 			? {
-					images: [
-						{
-							url: product.thumbnail.url,
-							alt: product.name,
-						},
-					],
-				}
+				images: [
+					{
+						url: product.thumbnail.url,
+						alt: product.name,
+					},
+				],
+			}
 			: null,
 	};
 }
@@ -130,10 +158,11 @@ export default async function Page(props: {
 		? formatMoney(selectedVariant.pricing.price.gross.amount, selectedVariant.pricing.price.gross.currency)
 		: isAvailable
 			? formatMoneyRange({
-					start: product?.pricing?.priceRange?.start?.gross,
-					stop: product?.pricing?.priceRange?.stop?.gross,
-				})
+				start: product?.pricing?.priceRange?.start?.gross,
+				stop: product?.pricing?.priceRange?.stop?.gross,
+			})
 			: "";
+
 
 	const productJsonLd: WithContext<Product> = {
 		"@context": "https://schema.org",
@@ -141,31 +170,31 @@ export default async function Page(props: {
 		image: product.thumbnail?.url,
 		...(selectedVariant
 			? {
-					name: `${product.name} - ${selectedVariant.name}`,
-					description: product.seoDescription || `${product.name} - ${selectedVariant.name}`,
-					offers: {
-						"@type": "Offer",
-						availability: selectedVariant.quantityAvailable
-							? "https://schema.org/InStock"
-							: "https://schema.org/OutOfStock",
-						priceCurrency: selectedVariant.pricing?.price?.gross.currency,
-						price: selectedVariant.pricing?.price?.gross.amount,
-					},
-				}
+				name: `${product.name} - ${selectedVariant.name}`,
+				description: product.seoDescription || `${product.name} - ${selectedVariant.name}`,
+				offers: {
+					"@type": "Offer",
+					availability: selectedVariant.quantityAvailable
+						? "https://schema.org/InStock"
+						: "https://schema.org/OutOfStock",
+					priceCurrency: selectedVariant.pricing?.price?.gross.currency,
+					price: selectedVariant.pricing?.price?.gross.amount,
+				},
+			}
 			: {
-					name: product.name,
+				name: product.name,
 
-					description: product.seoDescription || product.name,
-					offers: {
-						"@type": "AggregateOffer",
-						availability: product.variants?.some((variant) => variant.quantityAvailable)
-							? "https://schema.org/InStock"
-							: "https://schema.org/OutOfStock",
-						priceCurrency: product.pricing?.priceRange?.start?.gross.currency,
-						lowPrice: product.pricing?.priceRange?.start?.gross.amount,
-						highPrice: product.pricing?.priceRange?.stop?.gross.amount,
-					},
-				}),
+				description: product.seoDescription || product.name,
+				offers: {
+					"@type": "AggregateOffer",
+					availability: product.variants?.some((variant) => variant.quantityAvailable)
+						? "https://schema.org/InStock"
+						: "https://schema.org/OutOfStock",
+					priceCurrency: product.pricing?.priceRange?.start?.gross.currency,
+					lowPrice: product.pricing?.priceRange?.start?.gross.amount,
+					highPrice: product.pricing?.priceRange?.stop?.gross.amount,
+				},
+			}),
 	};
 
 	return (
@@ -190,12 +219,46 @@ export default async function Page(props: {
 				</div>
 				<div className="flex flex-col pt-6 sm:col-span-1 sm:px-6 sm:pt-0 lg:col-span-3 lg:pt-16">
 					<div>
-						<h1 className="mb-4 flex-auto text-3xl font-medium tracking-tight text-neutral-900">
+						<div>
+
+						<p className="text-sm text-gray-500 uppercase tracking-wider">Blush Berry</p>
+						<h3 className="text-3xl lg:text-4xl font-serif font-bold text-gray-900 mt-1">
 							{product?.name}
-						</h1>
-						<p className="mb-8 text-sm " data-testid="ProductElement_Price">
-							{price}
-						</p>
+						</h3>
+						</div>
+						<div className="flex flex-wrap gap-2 my-6">
+							
+								<span
+								
+									className="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full"
+								>
+								{product.category?.name}
+								</span>
+							
+						</div>
+
+						<div className="flex items-center space-x-3 mb-6">
+							<span className="text-3xl font-bold text-gray-900">
+								{price}
+							</span>
+										{/* {price && (
+							<span className="text-xl text-gray-500 line-through">
+								{price}
+							</span>
+							)}
+							{price && (
+							<span className="px-2 py-1 bg-red-100 text-red-700 text-sm font-medium rounded">
+								Save {price}
+							</span>
+							)} */}
+						</div>
+						<div className="flex items-center space-x-2 mb-6">
+							<div className={`w-3 h-3 ${isAvailable ? 'bg-emerald-400' : 'bg-red-400'} rounded-full`}></div>
+							<span className="text-sm text-gray-700">
+
+								{isAvailable ? `In stock`: `Out of stock`}
+							</span>
+						</div>
 
 						{variants && (
 							<VariantSelector
@@ -205,10 +268,6 @@ export default async function Page(props: {
 								channel={params.channel}
 							/>
 						)}
-						<AvailabilityMessage isAvailable={isAvailable} />
-						<div className="mt-8">
-							<AddButton disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
-						</div>
 						{description && (
 							<div className="mt-8 space-y-6 text-sm text-neutral-500">
 								{description.map((content) => (
@@ -216,6 +275,13 @@ export default async function Page(props: {
 								))}
 							</div>
 						)}
+						<AvailabilityMessage isAvailable={isAvailable} />
+						<div className="my-8">
+							<AddButton disabled={!selectedVariantID || !selectedVariant?.quantityAvailable} />
+						</div>
+						{/* Product Benefits */}
+						<ProductBenefits />
+
 					</div>
 				</div>
 			</form>

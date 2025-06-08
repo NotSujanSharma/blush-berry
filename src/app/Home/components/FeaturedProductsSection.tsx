@@ -1,12 +1,28 @@
 
 import React from "react";
 import { ChevronRight } from "lucide-react";
-import ProductCard from "./ProductCard";
-import { type ProductListItemFragment } from "@/gql/graphql";
+// import ProductCard from "./ProductCard";
 import { LinkWithChannel } from "@/ui/atoms/LinkWithChannel";
+import { ProductElement } from "@/ui/components/ProductElement";
+import { ProductListByCollectionDocument } from "@/gql/graphql";
+import { executeGraphQL } from "@/lib/graphql";
 
-
-export function FeaturedProductsSection( { products }: { products: readonly ProductListItemFragment[] }) {
+export async function FeaturedProductsSection({ channel }: { channel: string }) {
+        const data = await executeGraphQL(ProductListByCollectionDocument, {
+            variables: {
+                slug: "featured-products",
+                channel: channel,
+            },
+            revalidate: 60,
+        });
+    
+        if (!data.collection?.products) {
+            return null;
+        }
+    
+        var products = data.collection?.products.edges.map(({ node: product }) => product);
+        //four products
+        products = products.slice(0, 4); 
     return (
         <section className="py-20 bg-pink-50/30">
             {" "}
@@ -24,16 +40,16 @@ export function FeaturedProductsSection( { products }: { products: readonly Prod
                    
             
                 {products.map((product, index) => (
-                    <ProductCard
+                //     <ProductCard
+                //       key={product.id}
+                //       product={product}
+                //   />
+                  <ProductElement
                       key={product.id}
-                      product={product}
-                  />
-          //         <ProductElement
-          //             key={product.id}
-          //           product={product}
-          //           priority={index < 2}
-					// loading={index < 3 ? "eager" : "lazy"}
-          //           />
+                    product={product}
+                    priority={index < 2}
+					loading={index < 3 ? "eager" : "lazy"}
+                    />
                   ))}
                 </div>
                 <div className="mt-16 text-center">

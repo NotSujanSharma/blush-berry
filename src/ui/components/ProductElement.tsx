@@ -14,12 +14,13 @@ export function ProductElement({
 	return (
 		<li data-testid="ProductElement">
 			<LinkWithChannel href={`/products/${product.slug}`} key={product.id}>
-				<div className="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 overflow-hidden transform hover:-translate-y-1">
+				<div className="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 overflow-hidden transform hover:-translate-y-1">
 					<div className="relative overflow-hidden  bg-gray-50"> {/* aspect-[3/4] */}
 						{product?.thumbnail?.url && (
 							<ProductImageWrapper
 								loading={loading}
 								src={product.thumbnail.url}
+								// src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=800&h=1000&fit=crop&crop=center"
 								alt={product.thumbnail.alt ?? ""}
 								width={512}
 								height={512}
@@ -33,11 +34,11 @@ export function ProductElement({
 								{product.category?.name}
 							</span>
 						)}
-						<div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+						{/* <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
 							<button className="w-full bg-gray-900 text-white py-2.5 rounded-full hover:bg-pink-600 transition-colors text-sm font-medium shadow-lg backdrop-blur-sm">
 								Quick Add
 							</button>
-						</div>
+						</div> */}
 					</div>
 					<div className="p-4">
 						<div className="mb-2">
