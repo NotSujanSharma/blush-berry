@@ -22,7 +22,7 @@ export const Nav = ({ channel }: { channel: string }) => {
 			</div>
 			<div className="flex items-center">
 				<Suspense fallback={<div className="w-6" />}>
-					<FavouriteItems channel={channel} />
+					<FavouriteItems />
 				</Suspense>
 			</div>
 			<div className="flex items-center">

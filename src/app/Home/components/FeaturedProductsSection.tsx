@@ -20,7 +20,7 @@ export async function FeaturedProductsSection({ channel }: { channel: string }) 
         return null;
     }
 
-    var products = data.collection?.products.edges.map(({ node: product }) => product);
+    let products = data.collection?.products.edges.map(({ node: product }) => product);
     //four products
     products = products.slice(0, 4);
     return (

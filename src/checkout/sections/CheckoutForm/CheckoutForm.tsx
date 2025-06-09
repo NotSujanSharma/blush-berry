@@ -14,7 +14,6 @@ import { UserBillingAddressSection } from "@/checkout/sections/UserBillingAddres
 import { PaymentSection, PaymentSectionSkeleton } from "@/checkout/sections/PaymentSection";
 import { GuestBillingAddressSection } from "@/checkout/sections/GuestBillingAddressSection";
 import { useUser } from "@/checkout/hooks/useUser";
-import { Footer } from "@/ui/components/Footer";
 
 export const CheckoutForm = () => {
 	const { user } = useUser();
