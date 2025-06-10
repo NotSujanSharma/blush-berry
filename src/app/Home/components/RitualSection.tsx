@@ -32,7 +32,7 @@ export const RitualSection = () => (
           </div>
           <div className="relative order-1 md:order-2 h-96 md:h-[550px]">
             <img
-              src="https://placehold.co/800x1000/fde6f0/7A5C58?text=Sensory+Beauty+Experience"
+              src="https://placehold.co/800x1000/fde6f0/7A5C58?text=Ingredients+ko+photo"
               alt="Artistic display of beauty product textures and ingredients"
               className="absolute inset-0 w-full h-full object-cover rounded-xl shadow-2xl transform md:-rotate-2 transition-all duration-500 hover:rotate-0 hover:scale-105"
               

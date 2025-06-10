@@ -36,13 +36,13 @@ export const HeroSection = () => (
               conscious living.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row sm:justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <a
-                href="#"
+              <LinkWithChannel
+                href="/products"
                 className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-pink-600 hover:bg-pink-700 transition-transform transform hover:scale-105 shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
               >
                 Explore Collection
                 <ChevronRight className="ml-2 -mr-1 h-5 w-5" />
-            </a>
+            </LinkWithChannel>
             <LinkWithChannel
               
                 href="/pages/our-philosophy"
@@ -55,7 +55,7 @@ export const HeroSection = () => (
           <div className="relative h-80 md:h-[500px] lg:h-[600px]">
             <img
               
-              src="https://placehold.co/800x1000/f8c8dc/6B4F4F?text=Elegant+Beauty+Display"
+              src="https://placehold.co/800x1000/f8c8dc/6B4F4F?text=Cristy+ko+photo"
               alt="Artistic beauty product display"
               className="absolute inset-0 w-full h-full object-cover rounded-xl shadow-2xl transform md:rotate-3 transition-all duration-500 hover:rotate-0 hover:scale-105"
               width={800}

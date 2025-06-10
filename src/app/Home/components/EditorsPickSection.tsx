@@ -1,4 +1,5 @@
 "use client";
+import { LinkWithChannel } from "@/ui/atoms/LinkWithChannel";
 import { Sparkles, Wand2 } from "lucide-react";
 import { useState } from "react";
 
@@ -77,15 +78,15 @@ export const EditorsPickSection = () => {
               {featuredProduct.description}
             </p>
             <p className="mt-3 text-2xl font-semibold text-pink-600">
-              {featuredProduct.price}
+              {featuredProduct.price} 
             </p>
             <div className="mt-8 space-y-4 md:space-y-0 md:space-x-4 flex flex-col md:flex-row items-center md:items-start">
-              <a
-                href="#"
+              <LinkWithChannel
+                href="/products/moonlit-dew-serum"
                 className="w-full md:w-auto inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gray-800 hover:bg-gray-900 transition-transform transform hover:scale-105 shadow-lg"
               >
-                Discover the Magic
-              </a>
+                Buy Now
+              </LinkWithChannel>
               <button
                 onClick={() => setShowAdviceForm(!showAdviceForm)}
                 className="w-full md:w-auto inline-flex items-center justify-center px-8 py-3 border-2 border-pink-500 text-base font-medium rounded-full text-pink-600 bg-transparent hover:bg-pink-50 hover:border-pink-600 transition-transform transform hover:scale-105 shadow-sm"
