@@ -1,2 +1,2 @@
-export const stripeGatewayId = "saleor.app.payment.stripe";
+export const stripeGatewayId = "app.saleor.stripe";
 export type StripeGatewayId = typeof stripeGatewayId;
